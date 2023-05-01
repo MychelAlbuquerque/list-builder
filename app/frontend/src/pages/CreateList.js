@@ -1,28 +1,34 @@
 import React, { useState } from 'react';
+import Item from '../components/Item';
 
 function CreateList() {
   const [list, setList] = useState([]);
-  const [listItem, setListItem] = useState();
+  const [item, setItem] = useState();
+
   const handleAddItem = () => {
-    setList([...list, listItem]);
-    setListItem('');
+    setList([...list, item]);
+    setItem('');
   }
 
   return (
     <div>
       <input
-        value={ listItem }
+        value={ item }
         placeholder="insira um item na lista"
-        onChange={ (e) => setListItem(e.target.value) }
+        onChange={ (e) => setItem(e.target.value) }
       />
       <button
         onClick={ handleAddItem }
       >
         Add Item
       </button>
-      {
-        list.length > 0 && (<p>{ list } </p>)
-      }
+      <div className="items">
+        {
+          list.map((item) => (
+            <Item item={ item }/>
+          ))
+        }
+      </div>
     </div>
   )
 }
